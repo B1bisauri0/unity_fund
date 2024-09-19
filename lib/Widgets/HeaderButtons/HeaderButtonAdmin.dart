@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Admin/estadisticas.dart';
 import 'package:unity_fund/Pages/Admin/inicio_admin.dart';
 import 'package:unity_fund/Pages/Admin/lista_usuarios.dart';
+import 'package:unity_fund/Pages/Admin/monitoreo_donaciones.dart';
 import 'package:unity_fund/Pages/Admin/monitoreo_proyectos.dart';
-import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
@@ -11,12 +12,11 @@ class Headerbuttonadmin extends StatefulWidget {
   int index;
   final int indexPagina;
   double sizeline;
-  List<Proyecto> proyectosLista;
-  List<User> usuarios;
   bool lineIsVisible;
+  User user;
 
-  Headerbuttonadmin(this.index, this.indexPagina, this.title, this.sizeline,
-      this.proyectosLista, this.usuarios,
+  Headerbuttonadmin(
+      this.index, this.indexPagina, this.title, this.sizeline, this.user,
       {super.key, this.lineIsVisible = true});
 
   @override
@@ -50,30 +50,37 @@ class _HeaderbuttonadminState extends State<Headerbuttonadmin> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  (InicioAdmin(widget.proyectosLista, widget.usuarios)),
+              builder: (context) => (InicioAdmin(widget.user)),
             ),
           );
         } else if (index == 1) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  (MonitoreoProyectos(widget.proyectosLista, widget.usuarios)),
+              builder: (context) => (MonitoreoProyectos(widget.user)),
             ),
           );
         } else if (index == 2) {
-          // IMPLEMENTAR LLAMADO A MONITOREO DONACIONES
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => (MonitoreoDonacion(widget.user)),
+            ),
+          );
         } else if (index == 3) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  (ListaUsuarios(widget.usuarios, widget.proyectosLista)),
+              builder: (context) => (ListaUsuarios(widget.user)),
             ),
           );
         } else if (index == 4) {
-          // IMPLEMENTAR LLAMADO A ESTADISTICA DEL SISTEMA
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => (Estadisticas(widget.user)),
+            ),
+          );
         }
       },
       child: Column(

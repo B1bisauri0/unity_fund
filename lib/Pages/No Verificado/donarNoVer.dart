@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unity_fund/Widgets/Headers/headerVer.dart';
-import 'package:unity_fund/Widgets/NoVer/cardDonar.dart';
+import 'package:unity_fund/Widgets/NoVer/cardDonarNoVer.dart';
 import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 

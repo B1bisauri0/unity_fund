@@ -47,7 +47,7 @@ class _log_inState extends State<log_in> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => InicioAdmin([], []),
+              builder: (context) => InicioAdmin(usuario!),
             ),
           );
         } else if (resultStatus == 60002) {
@@ -72,6 +72,8 @@ class _log_inState extends State<log_in> {
               builder: (context) => InicioNoVerificado(usuario!),
             ),
           );
+        } else if (resultStatus == 60004) {
+          _showErrorDialog(context, 'La cuenta se encuentra inactiva');
         } else {
           print(resultStatus);
           print(correo);
@@ -109,6 +111,8 @@ class _log_inState extends State<log_in> {
         return 'Cuenta verificada';
       case 60003:
         return 'Cuenta no verificada';
+      case 60004:
+        return 'La cuenta esta inactiva';
       default:
         return 'Error desconocido';
     }

@@ -1,26 +1,57 @@
-// ignore: file_names
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:unity_fund/Pages/Verificado/lista_proyectos_verificado.dart';
 import 'package:unity_fund/data/proyectos.dart';
+import 'package:unity_fund/data/sendEmail.dart';
 import 'package:unity_fund/data/users.dart';
 
-// ignore: must_be_immutable
-class Carddonar extends StatelessWidget {
+class Carddonar extends StatefulWidget {
   final Proyecto proyecto;
   final User usuario;
+
+  Carddonar(this.proyecto, this.usuario, {super.key});
+
+  @override
+  _CarddonarState createState() => _CarddonarState();
+}
+
+class _CarddonarState extends State<Carddonar> {
   final formatter = NumberFormat("#,##0.00", "es_ES");
   late double progreso;
   final TextEditingController _montoController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? _passwordError;
 
-  Carddonar(this.proyecto, this.usuario, {super.key}) {
-    if (proyecto.montoRecaudado >= proyecto.meta!) {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.proyecto.montoRecaudado >= widget.proyecto.meta!) {
       progreso = 1;
     } else {
-      progreso = proyecto.montoRecaudado / proyecto.meta!;
+      progreso = widget.proyecto.montoRecaudado / widget.proyecto.meta!;
+    }
+  }
+
+// Función para obtener el correo electrónico del dueño del proyecto
+  Future<String?> _getEmailByProject(String projectName) async {
+    final url = Uri.parse(
+        'http://127.0.0.1:8000/getEmailByProject?projectName=$projectName');
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data[0];
+      } else {
+        throw Exception(
+            'Error al obtener el correo electrónico del dueño del proyecto');
+      }
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
@@ -30,9 +61,9 @@ class Carddonar extends StatelessWidget {
 
     final donationData = {
       'DonationValue': double.parse(_montoController.text),
-      'DonorEmail': usuario.correo,
-      'DonorProfileNickName': usuario.username,
-      'ProjectName': proyecto.title,
+      'DonorEmail': widget.usuario.correo,
+      'DonorProfileNickName': widget.usuario.username,
+      'ProjectName': widget.proyecto.title,
     };
 
     try {
@@ -48,13 +79,82 @@ class Carddonar extends StatelessWidget {
         final errorMessage = data[1];
 
         if (resultCode != 0) {
-          // Mostrar mensaje de error
-          print(errorMessage);
+          if (resultCode == 50018) {
+            setState(() {
+              _passwordError = getErrorMessage(50018);
+            });
+          } else {
+            print(errorMessage);
+          }
         } else {
+          String nombreAux = widget.usuario.nombre;
+          String proyectoAux = widget.proyecto.title;
+          // Se envia Email
+          String mensajeAgradecimientoDonacion = '''
+¡Gracias por tu generosa donación!
+
+Hola $nombreAux,
+
+Queremos expresarte nuestro más sincero agradecimiento por tu reciente donación a el proyecto "$proyectoAux" en Unity Fund. Tu apoyo es fundamental para ayudar a que este proyecto alcance sus objetivos y tenga un impacto positivo.
+
+Gracias a contribuciones como la tuya, estamos un paso más cerca de hacer realidad esta causa. Tu generosidad y compromiso son verdaderamente apreciados.
+
+Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.
+
+¡Gracias por ser parte de nuestra comunidad y por tu valioso apoyo!
+
+Saludos cordiales,
+El equipo de Unity Fund
+''';
+
+          EmailService emailEnviarAgradecimiento = EmailService();
+          emailEnviarAgradecimiento.sendEmail(
+            to: widget.usuario.correo,
+            subject: "¡Gracias por tu generosa donacion!",
+            body: mensajeAgradecimientoDonacion,
+          );
+
+          // Enviar mensaje a dueno proyecto
+          String proyectoName = widget.proyecto.title;
+          String montoDonar = _montoController.text;
+          // Se envia Email
+          String correoDueno = _getEmailByProject(proyectoName).toString();
+          print(correoDueno);
+          String mensajeNotificacionNuevaDonacion = '''
+¡Tienes una nueva donación!
+
+Hola!,
+
+Nos complace informarte que se ha recibido una nueva donación para tu proyecto
+"$proyectoName" en Unity Fund. A continuación, encontrarás los detalles
+de la donación:
+
+- Monto de la donación: $montoDonar
+- Donante: $nombreAux
+
+Te animamos a revisar el progreso de tu proyecto y a continuar motivando a tus
+donantes. Gracias por tu dedicación y por hacer posible que esta causa avance.
+
+Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos.
+
+¡Gracias por tu esfuerzo y por contribuir a la comunidad de Unity Fund!
+
+Saludos cordiales,
+El equipo de Unity Fund
+''';
+
+          EmailService emailEnviarDueno = EmailService();
+          emailEnviarDueno.sendEmail(
+            to: widget.usuario.correo,
+            subject: "¡Gracias por tu generosa donacion!",
+            body: mensajeAgradecimientoDonacion,
+          );
+
+          // Navegar a otra pagina
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ListaProyectosVerificado(usuario),
+              builder: (context) => ListaProyectosVerificado(widget.usuario),
             ),
           );
         }
@@ -66,11 +166,24 @@ class Carddonar extends StatelessWidget {
     }
   }
 
+  String getErrorMessage(int errorCode) {
+    switch (errorCode) {
+      case 50016:
+        return 'Donante no encontrado';
+      case 50017:
+        return 'Autor de proyecto o proyecto no encontrado';
+      case 50018:
+        return 'Fondos insuficientes';
+      default:
+        return 'Error desconocido';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 1050,
-      height: 900,
+      height: 750,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(0),
@@ -121,6 +234,9 @@ class Carddonar extends StatelessWidget {
                                 return 'Ingresar un monto es obligatorio';
                               }
                               final parsedValue = double.tryParse(value);
+                              if (_passwordError != null) {
+                                return _passwordError; // Muestra el error almacenado
+                              }
                               if (parsedValue == null) {
                                 return 'Por favor, introduce un número valido';
                               }
@@ -262,7 +378,7 @@ class Carddonar extends StatelessWidget {
                         children: [
                           const SizedBox(width: 25),
                           Text(
-                            "\$${formatter.format(proyecto.meta)}",
+                            "\$${formatter.format(widget.proyecto.meta)}",
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 27,
@@ -285,7 +401,7 @@ class Carddonar extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "\$${formatter.format(proyecto.montoRecaudado)}",
+                            "\$${formatter.format(widget.proyecto.montoRecaudado)}",
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 24,
@@ -303,7 +419,8 @@ class Carddonar extends StatelessWidget {
                             height: 15,
                             width: 490,
                             child: LinearProgressIndicator(
-                              value: proyecto.montoRecaudado / proyecto.meta!,
+                              value: widget.proyecto.montoRecaudado /
+                                  widget.proyecto.meta!,
                               backgroundColor: Colors.grey[300],
                               color: const Color.fromRGBO(41, 132, 185, 1),
                             ),
@@ -311,14 +428,6 @@ class Carddonar extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 50),
-                      Text(
-                        proyecto.texto,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(79, 76, 76, 1),
-                          fontSize: 24,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
                     ],
                   ),
                 ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unity_fund/Widgets/Headers/headerVer.dart';
+import 'package:unity_fund/Widgets/Headers/headerNoVer.dart';
 import 'package:unity_fund/Widgets/Verificado/cardProyectoVer.dart';
 import 'package:unity_fund/data/proyectos.dart';
 import 'dart:convert';
@@ -72,7 +72,7 @@ class _ListaProyectosNoVerificadoState
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: Headerver(widget.usuario, 4),
+      appBar: Headernover(widget.usuario, 2),
       backgroundColor: const Color.fromRGBO(206, 236, 247, 1),
       body: FutureBuilder<List<Proyecto>>(
         future: _futureProyectos,

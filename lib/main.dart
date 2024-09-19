@@ -1,83 +1,13 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unity_fund/Pages/Base/inicio_sesion.dart';
-import 'package:unity_fund/Pages/Verificado/donarVer.dart';
-import 'package:unity_fund/Widgets/Base/log_in.dart';
-import 'package:unity_fund/data/proyectos.dart';
-import 'package:unity_fund/data/users.dart';
+import 'package:unity_fund/Pages/Base/inicio_base.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  List<Proyecto> proyectos = [
-    Proyecto(
-        title: "Hola Me llamo Pepe",
-        texto: "Hola me llamo Godos",
-        meta: 2000,
-        montoRecaudado: 1900,
-        fecha: DateTime.utc(2024, 6, 6),
-        detalle:
-            "DHJFDS dfhjjhdsaf hdjfjhdsajkf hfsdkjhgjksa jhdasafkjhsad jhfsadkjfh sadfhksah khsfjkhsddaf hadskfjhksjahdf jkhfsdajkfh vcxbznmb nbvcxm bnfgd cxbzv zxcvbnm fgds qew",
-        usuario: "Pepe",
-        dueno: 1,
-        empresa: "",
-        pais: "Chile"),
-    Proyecto(
-        title: "Hola Me llamo Pepe",
-        texto: "Hola me llamo Godos",
-        meta: 2000,
-        montoRecaudado: 1900,
-        fecha: DateTime.utc(2024, 6, 6),
-        detalle:
-            "DHJFDS dfhjjhdsaf hdjfjhdsajkf hfsdkjhgjksa jhdasafkjhsad jhfsadkjfh sadfhksah khsfjkhsddaf hadskfjhksjahdf jkhfsdajkfh vcxbznmb nbvcxm bnfgd cxbzv zxcvbnm fgds qew",
-        usuario: "Pepe",
-        dueno: 1,
-        empresa: "",
-        pais: "Chile"),
-    Proyecto(
-        title: "Sarah del Socorro",
-        texto:
-            "jkfdaslkf jlkadjslfkbsvkbsda hjgfhjgsadfg hjajdfbvbjvhba hjsdgfjafjgvk ahxbcvkjhaskdyriuywe euydgrfjhsgdajfhvsad fshdagfjasdf sdhjfgsjahdgf sdafhsdakfh",
-        meta: 3000,
-        montoRecaudado: 20000,
-        fecha: DateTime.utc(2024, 12, 24),
-        detalle:
-            "DHJFDS dfhjjhdsaf hdjfjhdsajkf hfsdkjhgjksa jhdasafkjhsad jhfsadkjfh sadfhksah khsfjkhsddaf hadskfjhksjahdf jkhfsdajkfh vcxbznmb nbvcxm bnfgd cxbzv zxcvbnm fgds qew",
-        usuario: "Maria",
-        dueno: 1,
-        empresa: "UNAM",
-        pais: "Chile"),
-    Proyecto(
-        title: "Sarah del Socorro",
-        texto:
-            "jkfdaslkf jlkadjslfkbsvkbsda hjgfhjgsadfg hjajdfbvbjvhba hjsdgfjafjgvk ahxbcvkjhaskdyriuywe euydgrfjhsgdajfhvsad fshdagfjasdf sdhjfgsjahdgf sdafhsdakfh",
-        meta: 3000,
-        montoRecaudado: 20000,
-        fecha: DateTime.utc(2024, 12, 24),
-        detalle:
-            "DHJFDS dfhjjhdsaf hdjfjhdsajkf hfsdkjhgjksa jhdasafkjhsad jhfsadkjfh sadfhksah khsfjkhsddaf hadskfjhksjahdf jkhfsdajkfh vcxbznmb nbvcxm bnfgd cxbzv zxcvbnm fgds qew",
-        usuario: "Maria",
-        dueno: 1,
-        empresa: "UNAM",
-        pais: "Chile")
-  ];
-  Proyecto proyectoNuevo = Proyecto(
-    title: "",
-    texto: "fsdjhasfdkjhasjkdhfkjhasdkf",
-    montoRecaudado: 0,
-    fecha: DateTime.now(),
-    meta: 10000,
-    detalle: "",
-    usuario: "Pepe",
-    dueno: 1,
-    empresa: "",
-    pais: "",
-  );
-
-  List<User> lista = [];
   MyApp();
 
   @override
@@ -95,7 +25,7 @@ class MyApp extends StatelessWidget {
           dividerColor: const Color.fromARGB(30, 30, 30, 1),
           secondaryHeaderColor: const Color.fromARGB(63, 62, 62, 1),
         ),
-        home: inicio_sesion([]),
+        home: InicioBase(),
       ),
     );
   }

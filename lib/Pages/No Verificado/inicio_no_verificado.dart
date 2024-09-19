@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unity_fund/Pages/Base/inicio_sesion.dart';
 import 'package:unity_fund/Pages/No%20Verificado/lista_proyectos_no_verificado.dart';
-import 'package:unity_fund/Widgets/Base/log_in.dart';
+import 'package:unity_fund/Pages/No%20Verificado/mis_donaciones_noVer.dart';
+import 'package:unity_fund/Pages/No%20Verificado/sistema_de_pago_Nover.dart';
 import 'package:unity_fund/Widgets/Cards/cardInicio.dart';
 import 'package:unity_fund/Widgets/Headers/headerNoVer.dart';
 import 'package:unity_fund/data/users.dart';
@@ -239,7 +240,7 @@ class InicioNoVerificado extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    log_in(), // IMPLEMENTAR MIS DONACIONES
+                                    MisDonacionesNoVer(usuario),
                               ),
                             ),
                           ),
@@ -248,13 +249,19 @@ class InicioNoVerificado extends StatelessWidget {
                       SizedBox(width: screenWidth * 0.06),
                       Cardinicio(3,
                           onButtonPressed: () =>
-                              inicio_sesion([])), // IMPLEMENTAR CARTERA DIGITAL
+                              inicio_sesion()), // IMPLEMENTAR CARTERA DIGITAL
 
                       SizedBox(width: screenWidth * 0.06),
 
-                      Cardinicio(6,
-                          onButtonPressed: () =>
-                              inicio_sesion([])), // IMPLEMENTAR SISTEMA DE PAGO
+                      Cardinicio(
+                        6,
+                        onButtonPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AnhadirAlBalanceNoVer(usuario)),
+                        ),
+                      ),
                     ],
                   ),
                 ],

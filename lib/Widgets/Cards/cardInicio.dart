@@ -29,7 +29,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 1:
         {
           weight = 440;
-          height = 340;
+          height = 300;
           title = 'Donar';
           button = "Ir a Proyectos";
           listaText.add(
@@ -41,7 +41,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 2:
         {
           weight = 440;
-          height = 370;
+          height = 350;
           title = 'Mis Donaciones';
           button = 'Mis Donaciones';
           listaText.add(
@@ -53,7 +53,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 3:
         {
           weight = 440;
-          height = 670;
+          height = 590;
           title = 'Cartera Digital';
           button = 'Cartera Digital';
           listaText.add(
@@ -64,7 +64,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 4:
         {
           weight = 440;
-          height = 500;
+          height = 460;
           title = 'Crear Proyectos';
           button = 'Crear Proyectos';
           listaText.add(
@@ -75,7 +75,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 5:
         {
           weight = 440;
-          height = 370;
+          height = 350;
           title = 'Mis Proyectos';
           button = 'Mis Proyectos';
           listaText.add(
@@ -86,7 +86,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 6:
         {
           weight = 440;
-          height = 360;
+          height = 330;
           title = 'Sistema de Pago';
           button = 'Sistema de Pago';
           listaText.add(
@@ -135,7 +135,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 10:
         {
           weight = 440;
-          height = 350;
+          height = 300;
           title = 'Monitoreo de Donaciones';
           button = 'Monitoreo de Donaciones';
           listaText.add(
@@ -146,7 +146,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 11:
         {
           weight = 440;
-          height = 340;
+          height = 300;
           title = 'Gestión de Usuarios';
           button = 'Gestión de Usuarios';
           listaText.add(
@@ -157,7 +157,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 12:
         {
           weight = 440;
-          height = 340;
+          height = 320;
           title = 'Monitoreo de Proyectos';
           button = 'Monitoreo de Proyectos';
           listaText.add(
@@ -168,7 +168,7 @@ class _CardinicioState extends State<Cardinicio> {
       case 13:
         {
           weight = 440;
-          height = 390;
+          height = 345;
           title = 'Estadísticas del Sistema';
           button = 'Estadísticas del Sistema';
           listaText.add(

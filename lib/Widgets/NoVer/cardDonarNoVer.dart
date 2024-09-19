@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,20 +6,30 @@ import 'package:unity_fund/Pages/No%20Verificado/lista_proyectos_no_verificado.d
 import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 
-// ignore: must_be_immutable
-class CarddonarNoVer extends StatelessWidget {
+class CarddonarNoVer extends StatefulWidget {
   final Proyecto proyecto;
   final User usuario;
+
+  CarddonarNoVer(this.proyecto, this.usuario, {super.key});
+
+  @override
+  _CarddonarNoVerState createState() => _CarddonarNoVerState();
+}
+
+class _CarddonarNoVerState extends State<CarddonarNoVer> {
   final formatter = NumberFormat("#,##0.00", "es_ES");
   late double progreso;
   final TextEditingController _montoController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? _passwordError;
 
-  CarddonarNoVer(this.proyecto, this.usuario, {super.key}) {
-    if (proyecto.montoRecaudado >= proyecto.meta!) {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.proyecto.montoRecaudado >= widget.proyecto.meta!) {
       progreso = 1;
     } else {
-      progreso = proyecto.montoRecaudado / proyecto.meta!;
+      progreso = widget.proyecto.montoRecaudado / widget.proyecto.meta!;
     }
   }
 
@@ -30,9 +39,9 @@ class CarddonarNoVer extends StatelessWidget {
 
     final donationData = {
       'DonationValue': double.parse(_montoController.text),
-      'DonorEmail': usuario.correo,
-      'DonorProfileNickName': usuario.username,
-      'ProjectName': proyecto.title,
+      'DonorEmail': widget.usuario.correo,
+      'DonorProfileNickName': widget.usuario.username,
+      'ProjectName': widget.proyecto.title,
     };
 
     try {
@@ -48,13 +57,17 @@ class CarddonarNoVer extends StatelessWidget {
         final errorMessage = data[1];
 
         if (resultCode != 0) {
-          // Mostrar mensaje de error
+          if (resultCode == 50018) {
+            setState(() {
+              _passwordError = getErrorMessage(50018);
+            });
+          }
           print(errorMessage);
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ListaProyectosNoVerificado(usuario),
+              builder: (context) => ListaProyectosNoVerificado(widget.usuario),
             ),
           );
         }
@@ -63,6 +76,19 @@ class CarddonarNoVer extends StatelessWidget {
       }
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  String getErrorMessage(int errorCode) {
+    switch (errorCode) {
+      case 50016:
+        return 'Donante no encontrado';
+      case 50017:
+        return 'Autor de proyecto o proyecto no encontrado';
+      case 50018:
+        return 'Fondos insuficientes';
+      default:
+        return 'Error desconocido';
     }
   }
 
@@ -121,6 +147,9 @@ class CarddonarNoVer extends StatelessWidget {
                                 return 'Ingresar un monto es obligatorio';
                               }
                               final parsedValue = double.tryParse(value);
+                              if (_passwordError != null) {
+                                return _passwordError; // Muestra el error almacenado
+                              }
                               if (parsedValue == null) {
                                 return 'Por favor, introduce un número valido';
                               }
@@ -262,7 +291,7 @@ class CarddonarNoVer extends StatelessWidget {
                         children: [
                           const SizedBox(width: 25),
                           Text(
-                            "\$${formatter.format(proyecto.meta)}",
+                            "\$${formatter.format(widget.proyecto.meta)}",
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 27,
@@ -285,7 +314,7 @@ class CarddonarNoVer extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "\$${formatter.format(proyecto.montoRecaudado)}",
+                            "\$${formatter.format(widget.proyecto.montoRecaudado)}",
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 24,
@@ -303,7 +332,8 @@ class CarddonarNoVer extends StatelessWidget {
                             height: 15,
                             width: 490,
                             child: LinearProgressIndicator(
-                              value: proyecto.montoRecaudado / proyecto.meta!,
+                              value: widget.proyecto.montoRecaudado /
+                                  widget.proyecto.meta!,
                               backgroundColor: Colors.grey[300],
                               color: const Color.fromRGBO(41, 132, 185, 1),
                             ),
@@ -312,7 +342,7 @@ class CarddonarNoVer extends StatelessWidget {
                       ),
                       SizedBox(height: 50),
                       Text(
-                        proyecto.texto,
+                        widget.proyecto.texto,
                         style: const TextStyle(
                           color: Color.fromRGBO(79, 76, 76, 1),
                           fontSize: 24,

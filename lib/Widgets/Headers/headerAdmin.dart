@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Admin/profile_admin.dart';
 import 'package:unity_fund/Pages/Base/inicio_base.dart';
 import 'package:unity_fund/Widgets/HeaderButtons/HeaderButtonAdmin.dart';
-import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
 class Headeradmin extends StatefulWidget implements PreferredSizeWidget {
-  List<Proyecto> proyectosLista;
-  List<User> usuarios;
+  User usuario;
   int index;
 
-  Headeradmin(this.proyectosLista, this.usuarios, this.index, {super.key});
+  Headeradmin(this.usuario, this.index, {super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -55,20 +54,20 @@ class _HeaderadminState extends State<Headeradmin> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const SizedBox(width: 30),
-                  Headerbuttonadmin(0, widget.index, "Inicio", 45,
-                      widget.proyectosLista, widget.usuarios),
+                  Headerbuttonadmin(
+                      0, widget.index, "Inicio", 45, widget.usuario),
                   const SizedBox(width: 30),
                   Headerbuttonadmin(1, widget.index, "Monitoreo de Proyectos",
-                      210, widget.proyectosLista, widget.usuarios),
+                      210, widget.usuario),
                   const SizedBox(width: 30),
                   Headerbuttonadmin(2, widget.index, "Monitoreo de Donaciones",
-                      230, widget.proyectosLista, widget.usuarios),
+                      230, widget.usuario),
                   const SizedBox(width: 30),
                   Headerbuttonadmin(3, widget.index, "Gestion de Usuarios", 180,
-                      widget.proyectosLista, widget.usuarios),
+                      widget.usuario),
                   const SizedBox(width: 30),
-                  Headerbuttonadmin(4, widget.index, "Estadistica del Sistmema",
-                      220, widget.proyectosLista, widget.usuarios),
+                  Headerbuttonadmin(4, widget.index, "Estadisticas del Sistema",
+                      220, widget.usuario),
                   const SizedBox(width: 30),
                 ],
               ),
@@ -79,7 +78,7 @@ class _HeaderadminState extends State<Headeradmin> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => (InicioBase(widget.proyectosLista)),
+                    builder: (context) => (InicioBase()),
                   ),
                 );
               },
@@ -100,9 +99,19 @@ class _HeaderadminState extends State<Headeradmin> {
               ),
             ),
             const SizedBox(width: 20),
-            const Image(
-              image: AssetImage('assets/images/Header/User.jpg'),
-            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => (UsuarioAdmin(widget.usuario)),
+                  ),
+                );
+              },
+              child: Image(
+                image: AssetImage('assets/images/Header/User.jpg'),
+              ),
+            )
           ],
         ),
       ),

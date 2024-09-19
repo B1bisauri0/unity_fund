@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:unity_fund/Pages/Base/inicio_sesion.dart';
 import 'package:unity_fund/Pages/Verificado/crear_proyecto1.dart';
 import 'package:unity_fund/Pages/Verificado/lista_proyectos_verificado.dart';
+import 'package:unity_fund/Pages/Verificado/mis_donaciones_Ver.dart';
 import 'package:unity_fund/Pages/Verificado/mis_proyectos.dart';
+import 'package:unity_fund/Pages/Verificado/sistema_de_pago_ver.dart';
 import 'package:unity_fund/Widgets/Cards/cardInicio.dart';
 import 'package:unity_fund/Widgets/Headers/headerVer.dart';
 import 'package:unity_fund/data/proyectos.dart';
@@ -248,7 +249,7 @@ class InicioVerificado extends StatelessWidget {
                                         montoRecaudado: 0,
                                         detalle: "",
                                         usuario: "",
-                                        dueno: 1,
+                                        dueno: 0,
                                         empresa: "",
                                         pais: ""),
                                     -1)),
@@ -260,8 +261,15 @@ class InicioVerificado extends StatelessWidget {
                       SizedBox(width: screenWidth * 0.06),
                       Column(
                         children: [
-                          Cardinicio(2,
-                              onButtonPressed: () => inicio_sesion([])),
+                          Cardinicio(
+                            2,
+                            onButtonPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MisDonacionesVer(usuario)),
+                            ),
+                          ),
                           SizedBox(height: screenHeight * 0.09),
                           Cardinicio(
                             5,
@@ -277,11 +285,26 @@ class InicioVerificado extends StatelessWidget {
                       SizedBox(width: screenWidth * 0.06),
                       Column(
                         children: [
-                          Cardinicio(3,
-                              onButtonPressed: () => inicio_sesion([])),
+                          Cardinicio(
+                            3,
+                            onButtonPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AnhadirAlBalanceVer(usuario),
+                              ), // CARTERA DIGITAL
+                            ),
+                          ),
                           SizedBox(height: screenHeight * 0.09),
-                          Cardinicio(6,
-                              onButtonPressed: () => inicio_sesion([])),
+                          Cardinicio(
+                            6,
+                            onButtonPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AnhadirAlBalanceVer(usuario)),
+                            ),
+                          ),
                         ],
                       ),
                     ],

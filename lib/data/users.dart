@@ -34,7 +34,7 @@ class User {
   // Convertir a JSON
   Map<String, dynamic> toJson() => {
         'profileName': nombre,
-        'profileLastname': apellido,
+        'profileLastName': apellido,
         'profilePassword': contrasena,
         'personalID': cedula,
         'electronicMail': correo,
@@ -51,7 +51,7 @@ class User {
   // Convertir de JSON a instancia de User
   factory User.fromJson(Map<String, dynamic> json) => User(
         nombre: json['profileName'] ?? '',
-        apellido: json['profileLastname'] ?? '',
+        apellido: json['profileLastName'] ?? '',
         contrasena: json['profilePassword'] ?? '',
         cedula: json['personalID'] ?? '',
         correo: json['electronicMail'] ?? '',
@@ -67,4 +67,23 @@ class User {
             ? DateFormat('yyyy-MM-dd').parse(json['entryDate'])
             : null,
       );
+
+  Map<String, dynamic> toJsonUp() {
+    return {
+      'currentProfileNickName': username,
+      'profileNickName': username,
+      'profileName': nombre,
+      'profileLastName': apellido,
+      'electronicMail': correo,
+      // Otros campos no son necesarios para este endpoint
+    };
+  }
+
+  void updateFromJson(Map<String, dynamic> json) {
+    username = json['currentProfileNickName'];
+    username = json['profileNickName'];
+    nombre = json['profileName'];
+    apellido = json['profileLastName'];
+    correo = json['electronicMail'];
+  }
 }

@@ -7,10 +7,8 @@ import 'package:unity_fund/data/proyectos.dart';
 class CardProyecto extends StatelessWidget {
   final Proyecto proyecto;
   final formatter = NumberFormat("#,##0.00", "es_ES");
-  List<Proyecto> proyectosLista;
 
-  CardProyecto(this.proyecto, this.proyectosLista, {Key? key})
-      : super(key: key);
+  CardProyecto(this.proyecto, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -166,8 +164,7 @@ class CardProyecto extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          DetallaBaseProyectos(proyecto, proyectosLista),
+                      builder: (context) => DetallaBaseProyectos(proyecto),
                     ),
                   );
                 },

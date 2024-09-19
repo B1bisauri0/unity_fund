@@ -26,6 +26,7 @@ C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Base/imagenDetalle1.jpg
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Base/logo.png
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Base/proyectoImage.png
+C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Base/wallet.jpg
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Header/logo.png
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/Header/User.jpg
 C:/DART/unity_fund/unity_fund/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/login/backgroupRegister.png

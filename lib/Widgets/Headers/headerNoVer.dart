@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Base/inicio_base.dart';
+import 'package:unity_fund/Pages/No%20Verificado/profile_NO_verificado.dart';
 import 'package:unity_fund/Widgets/HeaderButtons/HeaderButtonNoVerificado.dart';
-import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
@@ -73,7 +74,14 @@ class _HeadernoverState extends State<Headernover> {
             ),
             // BOTON PARA INICIAR SESION
             FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InicioBase(),
+                  ),
+                );
+              },
               style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 23,
@@ -91,9 +99,20 @@ class _HeadernoverState extends State<Headernover> {
               ),
             ),
             const SizedBox(width: 20),
-            const Image(
-              image: AssetImage('assets/images/Header/User.jpg'),
-            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        (UsuarioNOAutentificado(widget.usuario)),
+                  ),
+                );
+              },
+              child: Image(
+                image: AssetImage('assets/images/Header/User.jpg'),
+              ),
+            )
           ],
         ),
       ),

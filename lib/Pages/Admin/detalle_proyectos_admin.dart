@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Admin/donaciones_proyectos_admin.dart';
 import 'package:unity_fund/Widgets/Cards/cardDetalle.dart';
 import 'package:unity_fund/Widgets/Cards/cardDonacionesDonar.dart';
 import 'package:unity_fund/Widgets/Headers/headerAdmin.dart';
@@ -8,11 +9,9 @@ import 'package:unity_fund/data/users.dart';
 // ignore: must_be_immutable
 class DetalleProyectosAdmin extends StatefulWidget {
   Proyecto proyecto;
-  List<Proyecto> proyectosLista;
-  List<User> usuarios;
+  User usuario;
 
-  DetalleProyectosAdmin(this.proyecto, this.proyectosLista, this.usuarios,
-      {super.key});
+  DetalleProyectosAdmin(this.proyecto, this.usuario, {super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -43,7 +42,7 @@ class _DetalleProyectosAdminState extends State<DetalleProyectosAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Headeradmin(widget.proyectosLista, widget.usuarios, 2),
+      appBar: Headeradmin(widget.usuario, 1),
       backgroundColor: const Color.fromRGBO(206, 236, 247, 1),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -98,36 +97,19 @@ class _DetalleProyectosAdminState extends State<DetalleProyectosAdmin> {
                           ),
                           elevation: 4,
                         ),
-                        onPressed: () {}, // Implementar archivado
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => (DonacionesProyectosAdmin(
+                                  widget.usuario, widget.proyecto)),
+                            ),
+                          );
+                        }, // Implementar archivado
                         child: const Text(
-                          "Archivar Proyecto",
+                          "Ver Donaciones",
                           style: TextStyle(
                             color: Colors.black,
-                            fontFamily: 'Inter',
-                            fontSize: 32,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 30),
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: const BorderSide(
-                              color: Colors.red, // Borde negro
-                              width: 2, // Grosor del borde
-                            ),
-                          ),
-                          elevation: 4,
-                        ),
-                        onPressed: () {}, // Implementar eliminado
-                        child: const Text(
-                          "Eliminar Proyecto",
-                          style: TextStyle(
-                            color: Colors.red,
                             fontFamily: 'Inter',
                             fontSize: 32,
                           ),

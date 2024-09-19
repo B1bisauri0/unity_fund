@@ -132,6 +132,7 @@ class _CrearProyecto1State extends State<CrearProyecto1> {
     widget.proyectoNuevo.title = _nombreController.text;
     widget.proyectoNuevo.pais = _selectedCountry ?? "";
     widget.proyectoNuevo.usuario = widget.usuario.username;
+    print(widget.usuario.username);
 
     if (widget.proyectoNuevo.dueno != "" && (isSelect3 || isSelect4)) {
       widget.proyectoNuevo.empresa = _empresaController.text;

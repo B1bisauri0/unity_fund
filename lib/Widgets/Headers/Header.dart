@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:unity_fund/Pages/Base/inicio_sesion.dart';
 import 'package:unity_fund/Pages/Base/registro.dart';
 import 'package:unity_fund/Widgets/HeaderButtons/HeaderButtonBase.dart';
-import 'package:unity_fund/data/proyectos.dart';
 
 // ignore: must_be_immutable
 class Header extends StatefulWidget implements PreferredSizeWidget {
-  List<Proyecto> proyectosLista;
   int index;
 
-  Header(this.proyectosLista, this.index, {super.key});
+  Header(this.index, {super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -54,11 +52,9 @@ class _HeaderState extends State<Header> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const SizedBox(width: 30),
-                  Headerbuttonbase(
-                      0, widget.index, "Inicio", 45, widget.proyectosLista),
+                  Headerbuttonbase(0, widget.index, "Inicio", 45),
                   const SizedBox(width: 30),
-                  Headerbuttonbase(
-                      1, widget.index, "Proyectos", 85, widget.proyectosLista),
+                  Headerbuttonbase(1, widget.index, "Proyectos", 85),
                   const SizedBox(width: 30),
                 ],
               ),
@@ -69,8 +65,7 @@ class _HeaderState extends State<Header> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          (inicio_sesion(widget.proyectosLista)),
+                      builder: (context) => (inicio_sesion()),
                     ));
               },
               style: FilledButton.styleFrom(

@@ -11,7 +11,7 @@ class Registro extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: Header([], -1),
+        appBar: Header(-1),
         body: Stack(
           children: [
             // Fondo de pantalla

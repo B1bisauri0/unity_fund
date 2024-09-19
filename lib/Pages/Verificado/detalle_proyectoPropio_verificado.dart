@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Verificado/donaciones_proyectos_ver.dart';
 import 'package:unity_fund/Pages/Verificado/editar_proyecto.dart';
 import 'package:unity_fund/Widgets/Cards/cardDetalle.dart';
 import 'package:unity_fund/Widgets/Cards/cardDonacionesDonar.dart';
@@ -96,7 +97,15 @@ class _DetalleProyectopropioVerificadoState
                           ),
                           elevation: 4,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => (DonacionesProyectosVer(
+                                  widget.usuario, widget.proyecto)),
+                            ),
+                          );
+                        },
                         child: const Text(
                           "Ver Donaciones",
                           style: TextStyle(

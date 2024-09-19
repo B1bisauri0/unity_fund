@@ -4,12 +4,10 @@ import 'package:unity_fund/Pages/Base/lista_proyectos.dart';
 import 'package:unity_fund/Pages/Base/registro.dart';
 import 'package:unity_fund/Widgets/Headers/Header.dart';
 import 'package:unity_fund/Widgets/Cards/cardInicio.dart';
-import 'package:unity_fund/data/proyectos.dart';
 
 // ignore: must_be_immutable
 class InicioBase extends StatelessWidget {
-  List<Proyecto> proyectosLista;
-  InicioBase(this.proyectosLista, {super.key});
+  InicioBase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,7 @@ class InicioBase extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: Header(proyectosLista, 0),
+      appBar: Header(0),
       body: Center(
         child: SingleChildScrollView(
           child: Center(
@@ -225,8 +223,7 @@ class InicioBase extends StatelessWidget {
                         onButtonPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                (ListaProyectosBase(proyectosLista)),
+                            builder: (context) => (ListaProyectosBase()),
                           ),
                         ),
                       ),
@@ -236,8 +233,7 @@ class InicioBase extends StatelessWidget {
                         onButtonPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                (inicio_sesion(proyectosLista)),
+                            builder: (context) => (inicio_sesion()),
                           ),
                         ),
                       ),

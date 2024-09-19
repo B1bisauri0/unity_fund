@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:unity_fund/Pages/Verificado/mis_proyectos.dart';
 import 'package:unity_fund/Widgets/Headers/headerVer.dart';
 import 'package:unity_fund/data/proyectos.dart';
+import 'package:unity_fund/data/sendEmail.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
@@ -138,7 +139,6 @@ class _EditarProyectoState extends State<EditarProyecto> {
   ];
 
   Future<void> enviarProyecto() async {
-    print('Enviando proyecto...');
     // Captura los datos del proyecto nuevo
     widget.proyectoNuevo.title = _nombreController.text;
     widget.proyectoNuevo.pais = _selectedCountry ?? "";
@@ -153,6 +153,36 @@ class _EditarProyectoState extends State<EditarProyecto> {
 
     await updateProject(
         context, widget.proyectoNuevo, this.CurrentProjectName, widget.usuario);
+
+    String nombreAux = widget.usuario.nombre;
+    String proyectoAux = widget.proyectoNuevo.title;
+    // Se envia Email
+    String mensajeActualizacionProyecto = '''
+¡Tu proyecto ha $proyectoAux sido actualizado exitosamente!
+
+Hola $nombreAux,
+
+Queremos informarte que los detalles de tu proyecto "$proyectoAux" han sido actualizados correctamente en Unity Fund. Te invitamos a revisar los cambios y asegurarte de que toda la información esté correcta y actualizada.
+
+Recuerda que puedes seguir recibiendo donaciones y monitorear el progreso de tu proyecto en cualquier momento.
+
+¡Gracias por ser parte de nuestra comunidad y confiar en Unity Fund para hacer realidad tus ideas!
+
+Saludos cordiales,
+El equipo de Unity Fund
+''';
+    EmailService emailEnviar = EmailService();
+    emailEnviar.sendEmail(
+      to: widget.usuario.correo,
+      subject: "¡Tu proyecto ha sido actualizado exitosamente! 🎉",
+      body: mensajeActualizacionProyecto,
+    );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MisProyectos(widget.usuario),
+      ),
+    );
   }
 
   @override

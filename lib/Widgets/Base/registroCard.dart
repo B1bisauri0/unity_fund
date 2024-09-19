@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:unity_fund/Pages/Base/inicio_sesion.dart';
+import 'package:unity_fund/data/sendEmail.dart';
 import 'package:unity_fund/data/users.dart';
 
 class Registrocard extends StatefulWidget {
@@ -23,6 +24,7 @@ class _RegistrocardState extends State<Registrocard> {
   final TextEditingController _contrasenaController = TextEditingController();
   bool isVerified = false;
 
+  // ignore: unused_field
   String? _correoError;
   //CREATE USER
   Future<void> createUser(BuildContext context, User user) async {
@@ -41,7 +43,7 @@ class _RegistrocardState extends State<Registrocard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => inicio_sesion([]),
+            builder: (context) => inicio_sesion(),
           ),
         );
       } else {
@@ -82,7 +84,8 @@ class _RegistrocardState extends State<Registrocard> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Ocurrió un error inesperado: $e'),
+            content: Text(
+                'El username, el correo electrónico o el número de cédula'),
             actions: <Widget>[
               TextButton(
                 child: Text('OK'),
@@ -113,6 +116,16 @@ class _RegistrocardState extends State<Registrocard> {
         verificado: isVerified,
         username: _userNameController.text,
         ingreso: DateTime.now(),
+      );
+
+      String nombreAux = usuarioNuevo.nombre;
+      // Se envia Email
+      EmailService emailEnviar = EmailService();
+      emailEnviar.sendEmail(
+        to: _correoController.text,
+        subject: "¡Bienvenida a Unity Fund! 🎉",
+        body:
+            "Nos alegra tenerte aquí $nombreAux. Esta es la plataforma donde juntos podemos crear, compartir y colaborar en proyectos que marcan la diferencia. ¡Únete a nuestra comunidad y comienza a explorar todo lo que Unity Fund tiene para ofrecer! 🌟",
       );
 
       createUser(context, usuarioNuevo);

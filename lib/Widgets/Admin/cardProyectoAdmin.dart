@@ -8,12 +8,8 @@ import 'package:unity_fund/data/users.dart';
 class Cardproyectoadmin extends StatelessWidget {
   final Proyecto proyecto;
   final formatter = NumberFormat("#,##0.00", "es_ES");
-  List<Proyecto> proyectosLista;
-  List<User> usuarios;
-
-  Cardproyectoadmin(this.proyecto, this.proyectosLista, this.usuarios,
-      {Key? key})
-      : super(key: key);
+  User usuario;
+  Cardproyectoadmin(this.proyecto, this.usuario, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +164,12 @@ class Cardproyectoadmin extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetalleProyectosAdmin(
-                          proyecto, proyectosLista, usuarios),
+                      builder: (context) =>
+                          DetalleProyectosAdmin(proyecto, usuario),
                     ),
                   );
                 },
+                heroTag: null,
                 backgroundColor: const Color.fromRGBO(41, 132, 185, 1),
                 shape: const CircleBorder(),
                 child: Icon(Icons.add,

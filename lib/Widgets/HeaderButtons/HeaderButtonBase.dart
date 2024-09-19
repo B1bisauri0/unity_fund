@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:unity_fund/Pages/Base/inicio_base.dart';
 import 'package:unity_fund/Pages/Base/lista_proyectos.dart';
-import 'package:unity_fund/data/proyectos.dart';
 
 // ignore: must_be_immutable
 class Headerbuttonbase extends StatefulWidget {
   String title;
   int index;
   double sizeline;
-  List<Proyecto> proyectosLista;
   bool lineIsVisible;
   final int indexPagina; // Nuevo parámetro para indicar el botón seleccionado
 
   Headerbuttonbase(this.index, this.indexPagina, this.title, this.sizeline,
-      this.proyectosLista,
       {super.key, this.lineIsVisible = true});
 
   @override
@@ -42,14 +39,14 @@ class _HeaderButtonBaseState extends State<Headerbuttonbase> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => InicioBase(widget.proyectosLista),
+              builder: (context) => InicioBase(),
             ),
           );
         } else if (index == 1) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ListaProyectosBase(widget.proyectosLista),
+              builder: (context) => ListaProyectosBase(),
             ),
           );
         }

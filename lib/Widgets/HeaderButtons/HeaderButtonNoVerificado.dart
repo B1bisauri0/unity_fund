@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/No%20Verificado/cartera_digital_NOver.dart';
 import 'package:unity_fund/Pages/No%20Verificado/inicio_no_verificado.dart';
 import 'package:unity_fund/Pages/No%20Verificado/lista_proyectos_no_verificado.dart';
-import 'package:unity_fund/data/proyectos.dart';
+import 'package:unity_fund/Pages/No%20Verificado/mis_donaciones_noVer.dart';
+import 'package:unity_fund/Pages/No%20Verificado/sistema_de_pago_Nover.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
@@ -50,7 +52,12 @@ class _HeaderButtonNOVerState extends State<HeaderButtonNOVer> {
             ),
           );
         } else if (index == 1) {
-          // IMPLEMENTAR LLAMADO A MIS DONACIONES
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => (MisDonacionesNoVer(widget.usuario)),
+            ),
+          );
         } else if (index == 2) {
           Navigator.push(
             context,
@@ -60,9 +67,19 @@ class _HeaderButtonNOVerState extends State<HeaderButtonNOVer> {
             ),
           );
         } else if (index == 3) {
-          // IMPLEMENTAR LLAMADO A CARTERA DIGITAL
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => (CarteraDigitalNOVer(widget.usuario)),
+            ),
+          );
         } else if (index == 4) {
-          // IMPLEMENTAR LLAMADO A SISTEMA DE PAGO
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => (AnhadirAlBalanceNoVer(widget.usuario)),
+            ),
+          );
         }
       },
       child: Column(

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:unity_fund/Pages/Admin/estadisticas.dart';
 import 'package:unity_fund/Pages/Admin/lista_usuarios.dart';
+import 'package:unity_fund/Pages/Admin/monitoreo_donaciones.dart';
 import 'package:unity_fund/Pages/Admin/monitoreo_proyectos.dart';
-import 'package:unity_fund/Widgets/Base/log_in.dart';
 import 'package:unity_fund/Widgets/Cards/cardInicio.dart';
 import 'package:unity_fund/Widgets/Headers/headerAdmin.dart';
-import 'package:unity_fund/data/proyectos.dart';
 import 'package:unity_fund/data/users.dart';
 
 // ignore: must_be_immutable
 class InicioAdmin extends StatelessWidget {
-  List<Proyecto> proyectosLista;
-  List<User> usuarios;
-  InicioAdmin(this.proyectosLista, this.usuarios, {super.key});
+  User usuario;
+  InicioAdmin(this.usuario, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class InicioAdmin extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: Headeradmin(proyectosLista, usuarios, 0),
+      appBar: Headeradmin(usuario, 0),
       body: Center(
         child: SingleChildScrollView(
           child: Center(
@@ -226,8 +225,13 @@ class InicioAdmin extends StatelessWidget {
                         children: [
                           Cardinicio(
                             10,
-                            onButtonPressed: () =>
-                                log_in(), // IMPLEMENTAR MONITOREO DE DONACIONES
+                            onButtonPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    (MonitoreoDonacion(usuario)),
+                              ),
+                            ),
                           ),
                           SizedBox(height: screenHeight * 0.09),
                           Cardinicio(
@@ -235,8 +239,7 @@ class InicioAdmin extends StatelessWidget {
                             onButtonPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    (ListaUsuarios(usuarios, proyectosLista)),
+                                builder: (context) => (ListaUsuarios(usuario)),
                               ),
                             ),
                           ),
@@ -248,16 +251,19 @@ class InicioAdmin extends StatelessWidget {
                         onButtonPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                (MonitoreoProyectos(proyectosLista, usuarios)),
+                            builder: (context) => (MonitoreoProyectos(usuario)),
                           ),
                         ),
                       ),
                       SizedBox(width: screenWidth * 0.06),
                       Cardinicio(
                         13,
-                        onButtonPressed: () =>
-                            log_in(), // IMPLEMENTAR ESTADISTICAS DEL SISTEMA
+                        onButtonPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => (Estadisticas(usuario)),
+                          ),
+                        ),
                       ),
                     ],
                   ),

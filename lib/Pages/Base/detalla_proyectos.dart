@@ -7,9 +7,8 @@ import 'package:unity_fund/data/proyectos.dart';
 // ignore: must_be_immutable
 class DetallaBaseProyectos extends StatefulWidget {
   Proyecto proyecto;
-  List<Proyecto> proyectosLista;
 
-  DetallaBaseProyectos(this.proyecto, this.proyectosLista, {super.key});
+  DetallaBaseProyectos(this.proyecto, {super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -40,7 +39,7 @@ class _DetalleBaseState extends State<DetallaBaseProyectos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(widget.proyectosLista, 1),
+      appBar: Header(1),
       backgroundColor: const Color.fromRGBO(206, 236, 247, 1),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
