@@ -22,7 +22,6 @@ Built with **Flutter** on the front end and a **Python (FastAPI)** API on the ba
 - **Browse causes:** explore projects by category and see how close each one is to its goal.
 - **Cross-platform:** one Flutter codebase that runs on the web, Android, iOS and desktop.
 
-<img width="1920" height="2045" alt="Catalogo" src="https://github.com/user-attachments/assets/a25e45e5-ba74-494c-8428-74dca2c1c8ae" />
 
 ## How it works
 
