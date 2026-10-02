@@ -8,7 +8,6 @@ Built with **Flutter** on the front end and a **Python (FastAPI)** API on the ba
 
 > **Note:** the backend and database are currently turned off, so the live demo shows the interface only. Signing up, logging in, creating projects and donating won't work there. To try the full app, run the backend locally.
 
-<img width="205" height="917" alt="OpenHamburgerUsuarioNoVerificado" src="https://github.com/user-attachments/assets/afe83c19-5f1e-4d91-b47e-14f4b8acbcdc" />
 <img width="1920" height="1927" alt="Mis Proyectos" src="https://github.com/user-attachments/assets/8320cf35-85a1-493d-bdb4-a0649e487427" />
 <img width="412" height="917" alt="Mis Donaciones Usuario No Verificado" src="https://github.com/user-attachments/assets/effd3ff6-e2c0-4c0c-9c77-f3af0ba07604" />
 <img width="1920" height="1080" alt="Mis Donaciones" src="https://github.com/user-attachments/assets/2a7e4cb8-4b67-46a5-b76d-27ab81af3e18" />
