@@ -1,0 +1,4 @@
+1 - fastapi
+2 - pydantic
+3 - uvicorn 
+4 - pyodbc
